@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Comida()
+comment1.params=
+comment1.target=int\ getX()
+comment2.params=
+comment2.target=int\ getY()
+comment3.params=
+comment3.target=int\ randomXSpot()
+comment4.params=
+comment4.target=int\ randomYSpot()
+comment5.params=
+comment5.target=java.awt.Image\ getImage()
+numComments=6
