@@ -169,7 +169,7 @@ public class Board extends JPanel implements ActionListener {
 
             switch (key){
                 case KeyEvent.VK_ENTER:
-<<<<<<< HEAD
+
                 if(isGameOver == true){
                     isGameOver = false;
                     score = new Score();
@@ -178,11 +178,7 @@ public class Board extends JPanel implements ActionListener {
                     goTo = "right";
                 }
                 break;
-=======
-                    score.addScore(100);
-                    break;
->>>>>>> origin/master
-                    
+               
                 case KeyEvent.VK_LEFT:
                 if(goTo == "right")
                     break;
@@ -202,12 +198,9 @@ public class Board extends JPanel implements ActionListener {
                 }
                     
                 case KeyEvent.VK_UP:
-<<<<<<< HEAD
+                
                 if(goTo == "down")
-=======
-                    score.addScore(10);
->>>>>>> origin/master
-                    break;
+                   break;
                 else{
                     head.setImage("images/headUpside.png");
                     goTo = "up";
@@ -215,15 +208,13 @@ public class Board extends JPanel implements ActionListener {
                 }
                     
                 case KeyEvent.VK_DOWN:
-<<<<<<< HEAD
+
                 if(goTo == "up")    
                     break;
                 else{
                     head.setImage("images/headDownside.png");
-                    goTo = "down";
-=======
-                    score.subScore(-10);
->>>>>>> origin/master
+                    goTo = "down";                   
+
                     break;
                 }
             }
