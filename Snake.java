@@ -11,7 +11,10 @@ import javax.swing.ImageIcon;
  */
 public class Snake extends JPanel
 {
-    private String headImage = "images/headRightSide.png";
+    private String headImageR = "images/headRightSide.png";
+    private String headImageL = "images/headLeftSide.png";
+    private String headImageU = "images/headUpside.png";
+    private String headImageD = "images/headDownside.png";
     private String bodyImage = "images/body.png";
     
     Snake next;
@@ -38,7 +41,7 @@ public class Snake extends JPanel
     public void carregarImagem(){
         ImageIcon ii = new ImageIcon(this.getClass().getResource(bodyImage));
         body = ii.getImage();
-        ii = new ImageIcon(this.getClass().getResource(headImage));
+        ii = new ImageIcon(this.getClass().getResource(headImageR));
         head = ii.getImage();
     }
     

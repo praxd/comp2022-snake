@@ -121,7 +121,8 @@ public class Board extends JPanel implements ActionListener {
         if(isGameOver == true){
             g2d.drawString("GAME OVER mate, sorry :(", 230, 180);
             g2d.drawString("Press ENTER to try again :D ",200, 300);
-           // trosoba de satan cobra.setNull();
+           cobra = new Fila();
+            sizeSnake = 2;
         }
         
         Toolkit.getDefaultToolkit().sync();
