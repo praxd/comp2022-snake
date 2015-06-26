@@ -48,6 +48,7 @@ public class Board extends JPanel implements ActionListener {
         
         timer = new Timer(250, this);
         timer.start();
+        
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -58,18 +59,20 @@ public class Board extends JPanel implements ActionListener {
             switch(goTo){
                 case "left":
                     head.mover(-30, 0);
+                    head.setImage(1);
                 break;
-                
                 case "right":
                     head.mover(30,0);
+                    head.setImage(0);
                 break;
-                
                 case "up":
                     head.mover(0, -30);
+                    head.setImage(2);
                 break;
                 
                 case "down":            
                     head.mover(0,30);
+                    head.setImage(3);
                 break;
             }
            
@@ -121,8 +124,9 @@ public class Board extends JPanel implements ActionListener {
         if(isGameOver == true){
             g2d.drawString("GAME OVER mate, sorry :(", 230, 180);
             g2d.drawString("Press ENTER to try again :D ",200, 300);
-           cobra = new Fila();
+            cobra = new Fila();
             sizeSnake = 2;
+           // trosoba de satan cobra.setNull();
         }
         
         Toolkit.getDefaultToolkit().sync();
@@ -139,54 +143,43 @@ public class Board extends JPanel implements ActionListener {
 
             switch (key){
                 case KeyEvent.VK_ENTER:
-
-                if(isGameOver == true){
-                    isGameOver = false;
-                    score = new Score();
-                    head = new Snake();                    
-                    fries = new Comida();                    
-                    goTo = "right";                    
-                }
+                    if(isGameOver == true){
+                        isGameOver = false;
+                        score = new Score();
+                        head = new Snake();                    
+                        fries = new Comida();                    
+                        goTo = "right";                    
+                    }
                 break;
                
                 case KeyEvent.VK_LEFT:
-                if(goTo == "right")
-                    break;
-                else{
-                   head.setImage("images/headLeftSide.png");
-                    goTo = "left";
-                    break;
-                }
-                    
+                    if(goTo == "right") {
+                        break;
+                    } else {
+                        goTo = "left";
+                        break;
+                    }
                 case KeyEvent.VK_RIGHT:
-                if(goTo == "left")
-                    break;
-                else{
-                    head.setImage("images/headRightSide.png");
-                    goTo = "right";
-                    break;
-                }
-                    
+                    if(goTo == "left") {
+                        break;
+                    } else{
+                        goTo = "right";
+                        break;
+                    }
                 case KeyEvent.VK_UP:
-                
-                if(goTo == "down")
-                   break;
-                else{
-                    head.setImage("images/headUpside.png");
-                    goTo = "up";
-                    break;
-                }
-                    
+                    if(goTo == "down"){
+                       break;
+                    } else {
+                        goTo = "up";
+                        break;
+                    }
                 case KeyEvent.VK_DOWN:
-
-                if(goTo == "up")    
-                    break;
-                else{
-                    head.setImage("images/headDownside.png");
-                    goTo = "down";                   
-
-                    break;
-                }
+                    if(goTo == "up"){
+                        break;
+                    } else{
+                        goTo = "down";                   
+                        break;
+                    }
             }
             
         }
