@@ -1,16 +1,10 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Board()
-comment1.params=g
-comment1.target=void\ paint(java.awt.Graphics)
-comment2.params=_x\ _y\ size
-comment2.target=void\ movesLikeJagger(int,\ int,\ int)
-comment3.params=e
-comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
-comment4.params=
-comment4.target=int\ snakeSize()
-comment5.params=
-comment5.target=boolean\ isEmpty()
-comment6.params=
-comment6.target=void\ ate()
-numComments=7
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=g
+comment2.target=void\ paint(java.awt.Graphics)
+comment3.params=
+comment3.target=boolean\ isEmpty()
+numComments=4

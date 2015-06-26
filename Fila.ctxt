@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Fila()
+comment1.params=node
+comment1.target=void\ add(Snake)
+comment2.params=
+comment2.target=void\ remove()
+comment3.params=
+comment3.target=Snake\ getSnake()
+comment4.params=
+comment4.target=boolean\ isEmpty()
+numComments=5

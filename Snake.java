@@ -11,29 +11,35 @@ import javax.swing.ImageIcon;
  */
 public class Snake extends JPanel
 {
-    private String snake = "images/headRightSide.png";
-    private String body = "images/body.png";
+    private String headImage = "images/headRightSide.png";
+    private String bodyImage = "images/body.png";
     
     Snake next;
     
     private int x;
     private int y;
     
-    private Image image;
+    private Image body, head,image;
     
     //Referente a cabeça
     public Snake() {
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(snake));
-        image = ii.getImage();
         x = 40;
         y = 60;
+        carregarImagem();
+        
     }
     //Referente ao corpo
     public Snake(int dx, int dy){
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(body));
-        image = ii.getImage();
         x= dx;
         y= dy;
+        carregarImagem();
+    }
+    
+    public void carregarImagem(){
+        ImageIcon ii = new ImageIcon(this.getClass().getResource(bodyImage));
+        body = ii.getImage();
+        ii = new ImageIcon(this.getClass().getResource(headImage));
+        head = ii.getImage();
     }
     
     public void mover(int dx, int dy) {
@@ -54,8 +60,12 @@ public class Snake extends JPanel
         return y;
     }
 
-    public Image getImage() {
-        return image;
+    public Image getBody() {
+        return body;
+    }
+    
+    public Image getHead() {
+        return head;
     }
     
     public Snake getNext(){
@@ -66,9 +76,10 @@ public class Snake extends JPanel
         this.next = _next;
     }
     
-    public void setImage(String head){
+    public void setImage(String head) {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(head));
         image = ii.getImage();
     }
+
     
 }

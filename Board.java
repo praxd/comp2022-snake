@@ -22,8 +22,11 @@ public class Board extends JPanel implements ActionListener {
     private boolean isPlaying = false;
     
     private Font font;
+    private int sizeSnake = 2;
     
     Snake head;
+    Fila cobra = new Fila();
+    
     Comida fries;
     
     
@@ -39,125 +42,91 @@ public class Board extends JPanel implements ActionListener {
         add(score);       
         
         fries = new Comida();
+        
         head = new Snake();
+        add(head);
         
-        Snake aux = head;
-        while( aux.getNext() != null){
-            add(aux);
-            aux = aux.getNext();
-        }
-        
-        add(fries);
-        
-        timer = new Timer(180, this);
+        timer = new Timer(250, this);
         timer.start();
     }
 
-
-    public void paint(Graphics g) {
-        super.paint(g);
-        score.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g;        
-
-        int size = snakeSize();
-        
-        Snake aux = head;
-        for(int i = 0; i < size; i++){
-            g2d.drawImage(aux.getImage(),aux.getX(),aux.getY(),this);
-            aux = aux.getNext();
-        }
-        
-        g2d.drawImage(fries.getImage(),fries.getX(),fries.getY(),this);
-        
-        if(isGameOver == true){
-            g2d.drawString("GAME OVER mate, sorry :(", 230, 180);
-            g2d.drawString("Press ENTER to try again :D ",200, 300); 
-        }
-        
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
-        
-    }
-    
-    public void movesLikeJagger(int _x, int _y, int size){// v
-        int currentX = _x, currentY = _y, x, y;
-        Snake aux = head;
-        
-        for(int i =1; i< size; i++){
-            aux.getNext();
-            x = aux.getX();
-            y = aux.getY();
-            aux.goTo(currentX, currentY);
-            currentX = x;
-            currentY = y;
-        }
-        
-    }
-    
-   
     public void actionPerformed(ActionEvent e) {
         
-        if(!isGameOver){// V        
-            int size = snakeSize(), currentX, currentY;
+        if(!isGameOver){
+            cobra.add(head);
+            head = new Snake(head.getX(), head.getY());
             switch(goTo){
                 case "left":
-                currentX = head.getX();
-                currentY = head.getY();
-                head.mover(-30, 0);
-                movesLikeJagger(currentX, currentY, size);
+                    head.mover(-30, 0);
                 break;
                 
                 case "right":
-                currentX = head.getX();
-                currentY = head.getY();
-                head.mover(30, 0);
-                movesLikeJagger(currentX, currentY,size);
+                    head.mover(30,0);
                 break;
                 
                 case "up":
-                currentX = head.getX();
-                currentY = head.getY();
-                head.mover(0, -30);
-                movesLikeJagger(currentX, currentY, size);
+                    head.mover(0, -30);
                 break;
                 
-                case "down":
-                currentX = head.getX();
-                currentY = head.getY();
-                head.mover(0,30);
-                movesLikeJagger(currentX,currentY, size);
+                case "down":            
+                    head.mover(0,30);
                 break;
-                               
             }
-        
+           
+            
             if(((head.getX() <= fries.getX()+15) 
                 && (head.getX() >= fries.getX()-15)) 
                 &&((head.getY() <= fries.getY()+15) 
                 && (head.getY() >= fries.getY()-15))){    
                     score.addScore(10);
                     fries = new Comida();
-                    ate();
+                    sizeSnake++;
             }
             
+            Snake aux = cobra.getSnake();
+            while (aux != null ) {                
+                if((aux.getX() == head.getX()) && (aux.getY() == head.getY())){
+                    isGameOver= true;
+                }
+                aux = aux.getNext();
+            }
+            
+            if(Fila.length > sizeSnake ) cobra.remove();
+            
+            // Bateu na parede
             if((head.getX()< 0) || (head.getX()> 790))
                 isGameOver= true;
             if((head.getY()< 0 || head.getY() > 590))
                 isGameOver= true;
-            //**
-            Snake aux;
-            if(size > 3){
-                aux = head.getNext();
-                for(int i=1; i < size; i++){
-                    if(((head.getX() <= aux.getX()+5) && (head.getX() >= aux.getX()-5)) &&
-                       ((head.getY() <= aux.getY()+5) && (head.getY() >= aux.getY()-5)     ) ){
-                            isGameOver = true;
-                    }
-                    aux = aux.getNext();
-                }
-               
-            }
+            
             repaint();
         }
+    }
+    
+    public void paint(Graphics g) {
+        super.paint(g);
+        score.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;        
+        
+        // Desenha a comida
+        g2d.drawImage(fries.getImage(), fries.getX(), fries.getY(), null);
+        
+        Snake aux = cobra.getSnake();
+        while (aux != null ) {
+            g2d.drawImage(aux.getBody(), aux.getX(), aux.getY(), null);
+            aux = aux.getNext();
+        }
+        g2d.drawImage(head.getHead(), head.getX(), head.getY(), null);
+        
+        if(isGameOver == true){
+            g2d.drawString("GAME OVER mate, sorry :(", 230, 180);
+            g2d.drawString("Press ENTER to try again :D ",200, 300);
+           // trosoba de satan cobra.setNull();
+        }
+        
+        Toolkit.getDefaultToolkit().sync();
+        g.dispose();
+        
     }
     
     
@@ -175,7 +144,7 @@ public class Board extends JPanel implements ActionListener {
                     score = new Score();
                     head = new Snake();                    
                     fries = new Comida();                    
-                    goTo = "right";
+                    goTo = "right";                    
                 }
                 break;
                
@@ -183,7 +152,7 @@ public class Board extends JPanel implements ActionListener {
                 if(goTo == "right")
                     break;
                 else{
-                    head.setImage("images/headLeftSide.png");
+                   head.setImage("images/headLeftSide.png");
                     goTo = "left";
                     break;
                 }
@@ -221,45 +190,12 @@ public class Board extends JPanel implements ActionListener {
             
         }
     }
-    
-    public int snakeSize(){
-        int positions;
-        
-        if(isEmpty() == true){
-            positions = 0;
-            return positions;
-        }else{
-            positions = 1;
-        }
-        
-        Snake aux = head;
-        
-        if(aux.getNext() == null){
-            positions = 1;
-        }
-        else{
-            do{
-                aux = aux.getNext();
-                positions++;
-            }while(aux.getNext() != null);
-        }
-        
-        return positions;
-                  }
-    
+   
     public boolean isEmpty(){
         if(head == null)
             return true;
         else
             return false;
     }
-    
-    public void ate(){
-        Snake aux = head;
-        while(aux.getNext() != null){
-            aux = aux.getNext();
-        }
-        aux.setNext(new Snake((aux.getX() +28),aux.getY()));
-    }
-    
+   
 }
