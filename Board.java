@@ -36,7 +36,7 @@ public class Board extends JPanel implements ActionListener {
         
         setFocusable(true);        
         setDoubleBuffered(true);
-        setBackground(Color.WHITE);
+        //setBackground(Color.WHITE);
 
         score = new Score();
         add(score);       
@@ -97,9 +97,9 @@ public class Board extends JPanel implements ActionListener {
             if(Fila.length > sizeSnake ) cobra.remove();
             
             // Bateu na parede
-            if((head.getX()< 0) || (head.getX()> 790))
+            if((head.getX()< 0) || (head.getX()> 770))
                 isGameOver= true;
-            if((head.getY()< 0 || head.getY() > 590))
+            if((head.getY()< 0 || head.getY() > 570))
                 isGameOver= true;
             
             repaint();
@@ -122,11 +122,11 @@ public class Board extends JPanel implements ActionListener {
         g2d.drawImage(head.getHead(), head.getX(), head.getY(), null);
         
         if(isGameOver == true){
+            g2d.setColor(Color.WHITE);
             g2d.drawString("GAME OVER mate, sorry :(", 230, 180);
             g2d.drawString("Press ENTER to try again :D ",200, 300);
             cobra = new Fila();
             sizeSnake = 2;
-           // trosoba de satan cobra.setNull();
         }
         
         Toolkit.getDefaultToolkit().sync();

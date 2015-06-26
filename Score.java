@@ -17,6 +17,10 @@ public class Score extends JPanel
     private int score;
     private Font font;
     
+    private String bg = "images/bg.png";
+    ImageIcon ii = new ImageIcon(this.getClass().getResource(bg));
+    Image image = ii.getImage();
+    
     /**
      * Constructor for objects of class Score
      */
@@ -64,7 +68,11 @@ public class Score extends JPanel
         }catch (Exception e){
             System.out.println(e.toString());
         }   
+        g2d.drawImage(image,0,0,this);
+        g2d.setColor(Color.WHITE);
         g2d.drawString("Score: " + this.score, 600, 50);
+      
+
     }
 
     /**
